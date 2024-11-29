@@ -33,5 +33,9 @@ Language Grammar::GetChains(std::size_t num_chains) {
     }
   }
 
+  if(!queue.empty()) {
+    language.insert(inf);
+  }
+
   return language;
 }
