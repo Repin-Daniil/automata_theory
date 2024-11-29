@@ -7,24 +7,24 @@ Language Grammar::GetChains(std::size_t num_chains) {
   Language language;
   std::queue<std::string> queue;
   queue.emplace(1, start_symbol_);
-
   while (!queue.empty() && language.size() < num_chains) {
     std::string current = queue.front();
     queue.pop();
 
     bool has_left_part = false;
 
-    for (const auto &[left, right]: rules_) {
-      size_t pos = current.find(left);
+    for (const auto &[left, right] : rules_) {
+      size_t pos = 0;
 
-      if (pos != std::string::npos) {
+      while ((pos = current.find(left, pos)) != std::string::npos) {
         has_left_part = true;
 
-        for (const auto &replacement: right) {
-          queue.push(current.substr(0, pos) + replacement + current.substr(pos + left.size()));
+        for (const auto &replacement : right) {
+          std::string new_string = current.substr(0, pos) + replacement + current.substr(pos + left.size());
+          queue.push(new_string);
         }
 
-        break;
+        pos += left.size();
       }
     }
 
