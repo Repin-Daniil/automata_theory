@@ -1,56 +1,46 @@
-#pragma once
+#include "language.hpp"
 
-#include <set>
-#include <string>
-#include <algorithm>
-#include <iterator>
-#include <sstream>
 
-using Language = std::set<std::string>;
-using Alphabet = std::set<char>;
-
-std::string empty_chain;
-std::string inf = "...";
-
-struct CustomComparator {
-    bool operator()(const std::string& a, const std::string& b) const {
-        if (a.size() != b.size()) {
-            return a.size() < b.size();
-        }
-
-        return a < b;
+struct OutputComparator {
+  bool operator()(const std::string& a, const std::string& b) const {
+    if (a.size() != b.size()) {
+      return a.size() < b.size();
     }
+
+    return a < b;
+  }
 };
 
 std::ostream &operator<<(std::ostream &os, const Language &language) {
-    std::stringstream result;
-    std::string delimiter = ", ";
-    bool is_inf = false;
+  std::stringstream result;
+  std::string delimiter = ", ";
+  bool is_inf = false;
 
-    auto chains = std::vector(language.begin(), language.end());
-    std::ranges::sort(chains, CustomComparator());
+  auto chains = std::vector(language.begin(), language.end());
+  std::ranges::sort(chains, OutputComparator());
 
-    for (std::string_view chain : chains) {
-        if (chain == inf) {
-            is_inf = true;
-            continue;
-        }
-
-        result << (chain.empty() ? "人" : chain) << delimiter;
+  for (std::string_view chain : chains) {
+    if (chain == inf) {
+      is_inf = true;
+      continue;
     }
 
-    auto str = result.str();
+    result << (chain.empty() ? "人" : chain) << delimiter;
+  }
 
-    if(is_inf) {
-        str += "...";
-    } else if(str.size() >= delimiter.size() + 1){
-        str.erase(str.size() - delimiter.size());
-    }
+  auto str = result.str();
 
-    os << "{" << str << "}";
+  if(is_inf) {
+    str += inf;
+  } else if(str.size() >= delimiter.size() + 1){
+    str.erase(str.size() - delimiter.size());
+  }
 
-    return os;
+  os << "{" << str << "}";
+
+  return os;
 }
+
 
 Language Union(const Language &lang1, const Language &lang2) {
     Language result;
@@ -135,7 +125,7 @@ Language Complement(const Language &language, const Alphabet &alphabet) {
 
 Language KleeneStar(const std::set<std::string>& language, int degree) {
     Language result;
-    result.insert("");
+    result.insert(empty_chain);
 
     auto current = language;
 
@@ -144,14 +134,14 @@ Language KleeneStar(const std::set<std::string>& language, int degree) {
         current = Concatenation(current, language);
     }
 
-    result.insert("...");
+    result.insert(inf);
 
     return result;
 }
 
 Language KleenePlus(const std::set<std::string>& language, int degree) {
     auto result = KleeneStar(language, degree);
-    result.erase("");
+    result.erase(empty_chain);
 
     return result;
 }
