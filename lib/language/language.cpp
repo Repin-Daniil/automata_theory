@@ -11,32 +11,36 @@ struct OutputComparator {
   }
 };
 
-std::ostream &operator<<(std::ostream &os, const Language &language) {
-  std::stringstream result;
-  std::string delimiter = ", ";
-  bool is_inf = false;
+inline std::string PrintLanguage(const Language &language) {
+    std::stringstream result;
+    std::string delimiter = ", ";
+    bool is_inf = false;
 
-  auto chains = std::vector(language.begin(), language.end());
-  std::ranges::sort(chains, OutputComparator());
+    auto chains = std::vector(language.begin(), language.end());
+    std::ranges::sort(chains, OutputComparator());
 
-  for (std::string_view chain : chains) {
-    if (chain == inf) {
-      is_inf = true;
-      continue;
+    for (std::string_view chain : chains) {
+        if (chain == inf) {
+            is_inf = true;
+            continue;
+        }
+
+        result << (chain.empty() ? "人" : chain) << delimiter;
     }
 
-    result << (chain.empty() ? "人" : chain) << delimiter;
-  }
+    auto str = result.str();
 
-  auto str = result.str();
+    if(is_inf) {
+        str += inf;
+    } else if(str.size() >= delimiter.size() + 1){
+        str.erase(str.size() - delimiter.size());
+    }
 
-  if(is_inf) {
-    str += inf;
-  } else if(str.size() >= delimiter.size() + 1){
-    str.erase(str.size() - delimiter.size());
-  }
+    return "{" + str + "}";
+}
 
-  os << "{" << str << "}";
+std::ostream &operator<<(std::ostream &os, const Language &language) {
+  os << PrintLanguage(language);
 
   return os;
 }

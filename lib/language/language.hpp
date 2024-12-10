@@ -12,6 +12,7 @@ using Alphabet = std::set<char>;
 static inline std::string empty_chain;
 static inline std::string inf = "...";
 
+std::string PrintLanguage(const Language &language);
 std::ostream &operator<<(std::ostream &os, const Language &language);
 
 Language Union(const Language &lang1, const Language &lang2);
