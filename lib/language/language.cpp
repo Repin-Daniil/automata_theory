@@ -11,7 +11,7 @@ struct OutputComparator {
   }
 };
 
-inline std::string PrintLanguage(const Language &language) {
+inline std::string GetChains(const Language &language) {
     std::stringstream result;
     std::string delimiter = ", ";
     bool is_inf = false;
@@ -40,7 +40,7 @@ inline std::string PrintLanguage(const Language &language) {
 }
 
 std::ostream &operator<<(std::ostream &os, const Language &language) {
-  os << PrintLanguage(language);
+  os << GetChains(language);
 
   return os;
 }

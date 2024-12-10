@@ -6,7 +6,9 @@ set(CMAKE_CXX_STANDARD 20)
 add_library(AutomataLib STATIC
         lib/language/language.hpp lib/language/language.cpp
         lib/grammar/grammar.hpp lib/grammar/grammar.cpp
-        lib/utils/format/formatter.hpp)
+        lib/utils/format/formatter.hpp
+        lib/automata/dfa.cpp
+        lib/automata/dfa.hpp)
 
 add_executable(task_1 samples/1.cpp)
 add_executable(task_2 samples/2.cpp)

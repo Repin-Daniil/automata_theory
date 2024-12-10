@@ -15,7 +15,7 @@ int main() {
     },
     'S');
 
-  PrintTask("L(G)", PrintLanguage(grammar_4.GetChains(50)));
+  PrintTask("L(G)", GetChains(grammar_4.GetChains(50)));
 
   return EXIT_SUCCESS;
 }

@@ -12,17 +12,17 @@ int main() {
   Language language_1 = {"a", "aa", "baa"};
   Language language_2 = {"b", "aa", "abb"};
 
-  PrintTask("L1 ∪ L2" ,PrintLanguage(Union(language_1, language_2)));
-  PrintTask("L1 ∩ L2", PrintLanguage(Intersection(language_1, language_2)));
+  PrintTask("L1 ∪ L2" ,GetChains(Union(language_1, language_2)));
+  PrintTask("L1 ∩ L2", GetChains(Intersection(language_1, language_2)));
 
-  PrintTask("L1 \\ L2", PrintLanguage(Difference(language_1, language_2)));
-  PrintTask("L2 \\ L1", PrintLanguage(Difference(language_2, language_1)));
+  PrintTask("L1 \\ L2", GetChains(Difference(language_1, language_2)));
+  PrintTask("L2 \\ L1", GetChains(Difference(language_2, language_1)));
 
-  PrintTask("L1L2", PrintLanguage(Concatenation(language_1, language_2)));
-  PrintTask("L2L1", PrintLanguage(Concatenation(language_2, language_1)));
+  PrintTask("L1L2", GetChains(Concatenation(language_1, language_2)));
+  PrintTask("L2L1", GetChains(Concatenation(language_2, language_1)));
 
-  PrintTask("L1'", PrintLanguage(Complement(language_1, alphabet)));
-  PrintTask("L2'", PrintLanguage(Complement(language_2, alphabet)));
+  PrintTask("L1'", GetChains(Complement(language_1, alphabet)));
+  PrintTask("L2'", GetChains(Complement(language_2, alphabet)));
 
   return EXIT_SUCCESS;
 }
