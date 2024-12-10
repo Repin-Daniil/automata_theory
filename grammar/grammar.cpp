@@ -1,4 +1,5 @@
 #include "grammar.hpp"
+#include <queue>
 
 Grammar::Grammar(Productions rules, char start_symbol) : rules_(std::move(rules)), start_symbol_(start_symbol) {
 }
@@ -7,6 +8,7 @@ Language Grammar::GetChains(std::size_t num_chains) {
   Language language;
   std::queue<std::string> queue;
   queue.emplace(1, start_symbol_);
+
   while (!queue.empty() && language.size() < num_chains) {
     std::string current = queue.front();
     queue.pop();
