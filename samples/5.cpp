@@ -1,12 +1,14 @@
 #include <iostream>
 
-#include "automata/dfa.hpp"
+#include "automata/DFA/dfa.hpp"
 #include "grammar/grammar.hpp"
 
 #include "utils/format/formatter.hpp"
 
 int main() {
   using namespace lab::format;
+
+  PrintHead("--- №4 ---");
 
   std::unordered_set<std::string> states = {"S", "A", "B", "C"};
   std::unordered_set<std::string> final_states = {"C"};
@@ -17,20 +19,13 @@ int main() {
     {"C", {{'c', "C"}}}
   };
 
-  // Создаем DFA
   DFA dfa("S", states, final_states, transitions);
 
-  // Генерация цепочек длиной до 5
   auto chains = dfa.GenerateChains(5);
-  std::cout << "Generated chains:" << std::endl;
-  for (const auto &chain: chains) {
-    std::cout << chain << std::endl;
-  }
+  PrintTask("L(M)", GetChains(chains));
 
-  // Проверка цепочек
-  std::cout << "Is 'ab' valid? " << (dfa.IsValidChain("ab") ? "Yes" : "No") << std::endl;
-  std::cout << "Is 'abc' valid? " << (dfa.IsValidChain("abc") ? "Yes" : "No") << std::endl;
-
+  dfa.ToDot("dfa.dot");
+  PrintTask("Графическое представление: ", "dfa.dot");
 
   return EXIT_SUCCESS;
 }

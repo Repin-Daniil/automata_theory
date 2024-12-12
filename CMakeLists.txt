@@ -7,8 +7,12 @@ add_library(AutomataLib STATIC
         lib/language/language.hpp lib/language/language.cpp
         lib/grammar/grammar.hpp lib/grammar/grammar.cpp
         lib/utils/format/formatter.hpp
-        lib/automata/dfa.cpp
-        lib/automata/dfa.hpp)
+        lib/automata/DFA/dfa.cpp
+        lib/automata/DFA/dfa.hpp
+        lib/automata/automata.cpp
+        lib/automata/automata.hpp
+        lib/automata/NFA/nfa.cpp
+        lib/automata/NFA/nfa.hpp)
 
 add_executable(task_1 samples/1.cpp)
 add_executable(task_2 samples/2.cpp)
