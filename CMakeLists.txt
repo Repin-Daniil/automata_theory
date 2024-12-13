@@ -12,7 +12,8 @@ add_library(AutomataLib STATIC
         lib/automata/automata.cpp
         lib/automata/automata.hpp
         lib/automata/NFA/nfa.cpp
-        lib/automata/NFA/nfa.hpp)
+        lib/automata/NFA/nfa.hpp
+        lib/automata/converter.h)
 
 add_executable(task_1 samples/1.cpp)
 add_executable(task_2 samples/2.cpp)

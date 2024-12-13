@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "automata/DFA/dfa.hpp"
+#include "automata/dfa/dfa.hpp"
 #include "grammar/grammar.hpp"
 
 #include "utils/format/formatter.hpp"
@@ -8,7 +8,7 @@
 int main() {
   using namespace lab::format;
 
-  PrintHead("--- №4 ---");
+  PrintHead("--- №5 ---");
 
   std::unordered_set<std::string> states = {"S", "A", "B", "C"};
   std::unordered_set<std::string> final_states = {"C"};

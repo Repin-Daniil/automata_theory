@@ -11,6 +11,7 @@ using Alphabet = std::set<char>;
 
 static inline std::string empty_chain;
 static inline std::string inf = "...";
+static inline std::string dummy_symbol = "◊";
 
 std::string GetChains(const Language &language);
 std::ostream &operator<<(std::ostream &os, const Language &language);

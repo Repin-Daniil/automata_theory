@@ -15,13 +15,13 @@ Language Grammar::GetChains(std::size_t num_chains) {
 
     bool has_left_part = false;
 
-    for (const auto &[left, right] : rules_) {
+    for (const auto &[left, right]: rules_) {
       size_t pos = 0;
 
       while ((pos = current.find(left, pos)) != std::string::npos) {
         has_left_part = true;
 
-        for (const auto &replacement : right) {
+        for (const auto &replacement: right) {
           std::string new_string = current.substr(0, pos) + replacement + current.substr(pos + left.size());
           queue.push(new_string);
         }
@@ -35,9 +35,29 @@ Language Grammar::GetChains(std::size_t num_chains) {
     }
   }
 
-  if(!queue.empty()) {
+  if (!queue.empty()) {
     language.insert(inf);
   }
 
   return language;
+}
+
+std::tuple<std::set<std::string>, std::set<char>, char, Productions> Grammar::GetFormalRepresentation() const {
+  std::set<std::string> non_terminals;
+  std::set<char> terminals;
+
+  for (const auto &[lhs, rhs_set]: rules_) {
+    non_terminals.insert(lhs);
+    for (const auto &rhs: rhs_set) {
+      for (char ch: rhs) {
+        if (isupper(ch)) {
+          non_terminals.insert(std::string(1, ch));
+        } else {
+          terminals.insert(ch);
+        }
+      }
+    }
+  }
+
+  return {non_terminals, terminals, start_symbol_, rules_};
 }

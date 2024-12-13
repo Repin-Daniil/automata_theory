@@ -68,3 +68,4 @@ void NFA::DFS(std::string &current_chain,
     }
   }
 }
+

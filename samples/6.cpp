@@ -1,12 +1,14 @@
 #include <iostream>
 
-#include "automata/NFA/nfa.hpp"
+#include "automata/nfa/nfa.hpp"
 #include "grammar/grammar.hpp"
 
 #include "utils/format/formatter.hpp"
 
 int main() {
   using namespace lab::format;
+
+  PrintHead("--- №6 ---");
 
   std::unordered_set<std::string> states = {"k1", "k2", "k3"};
   std::unordered_set<std::string> final_states = {"k3"};
@@ -19,11 +21,10 @@ int main() {
   NFA nfa("k1", states, final_states, transitions);
 
   auto chains = nfa.GenerateChains(5);
-  std::cout << "L(M) = " << chains << std::endl;
+  PrintTask("L(M)", GetChains(chains));
 
   nfa.ToDot("nfa.dot");
-
-  return 0;
+  PrintTask("Графическое представление: ", "nfa.dot");
 
   return EXIT_SUCCESS;
 }

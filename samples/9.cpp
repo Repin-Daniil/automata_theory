@@ -1,24 +1,52 @@
 #include <iostream>
 
+#include "automata/dfa/dfa.hpp"
 #include "grammar/grammar.hpp"
 
 #include "utils/format/formatter.hpp"
 
 int main() {
   using namespace lab::format;
-//TODO Сделать вывод грамматики по автомату
+
   PrintHead("--- №9 ---");
 
-  Grammar grammar({
-                    {"S", {"aA"}},
-                    {"A", {"bB"}},
-                    {"B", {"bB", "c", "cC"}},
-                    {"C", {"cC", "c"}},
-                  },
-                  'S');
+  std::unordered_set<std::string> states = {"S", "A", "B", "C"};
+  std::unordered_set<std::string> final_states = {"C"};
+  std::unordered_map<std::string, std::unordered_map<char, std::string> > transitions = {
+    {"S", {{'a', "A"}}},
+    {"A", {{'b', "B"}}},
+    {"B", {{'b', "B"}, {'c', "C"}}},
+    {"C", {{'c', "C"}}}
+  };
+
+  DFA dfa("S", states, final_states, transitions);
+  auto grammar_auto = dfa.GetRegularGrammar();
+
+  PrintTask("L(G)", GetChains(grammar_auto.GetChains(20)));
+
+  auto [Vn, Vt, S, P] = grammar_auto.GetFormalRepresentation();
+
+  PrintTask("Vn", GetChains(Vn));
 
 
-  PrintTask("L(G)", GetChains(grammar.GetChains(20)));
+  std::set<std::string> Vt_str;
+
+  for (const auto& terminal : Vt) {
+    Vt_str.insert(std::string(1, terminal));
+  }
+
+  PrintTask("Vt", GetChains(Vt_str));
+  PrintTask("S", std::string(1,S));
+
+  std::stringstream ss_2;
+
+  for (const auto& [lhs, rhs_set] : P) {
+    for (const auto& rhs : rhs_set) {
+      ss_2 << lhs << " -> " << rhs << "; ";
+    }
+  }
+
+  PrintTask("P", "{" + ss_2.str() + "}");
 
   return EXIT_SUCCESS;
 }

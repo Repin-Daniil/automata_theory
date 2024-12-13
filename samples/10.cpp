@@ -1,5 +1,6 @@
 #include <iostream>
 
+#include "automata/converter.h"
 #include "grammar/grammar.hpp"
 
 #include "utils/format/formatter.hpp"
@@ -15,7 +16,10 @@ int main() {
     },
     'S');
 
-  PrintTask("L(G)", GetChains(grammar_4.GetChains(50)));
+  PrintTask("L(G)", GetChains(grammar_4.GetChains(45)));
+  auto nfa = GetNFA(grammar_4);
+
+  PrintTask("L(G)", GetChains(nfa.GenerateChains(4)));
 
   return EXIT_SUCCESS;
 }
