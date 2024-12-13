@@ -3,6 +3,7 @@
 #include <fstream>
 
 #include "grammar/grammar.hpp"
+#include <memory>
 
 DFA::DFA(const std::string &start_id, const std::unordered_set<std::string> &states,
          const std::unordered_set<std::string> &final_states,

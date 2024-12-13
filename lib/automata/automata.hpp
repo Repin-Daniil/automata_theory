@@ -5,6 +5,7 @@
 #include <unordered_set>
 #include <queue>
 #include <vector>
+#include <memory>
 
 #include "language/language.hpp"
 
