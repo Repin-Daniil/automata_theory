@@ -34,11 +34,11 @@ int main() {
       {"Ø", {{'x', "Ø"}, {'0', "Ø"}}}
   };
 
-  DFA dfa("{k3}", states_1, final_states_1, transitions_1);
+  DFA dfa("{k1}", states_1, final_states_1, transitions_1);
 
-//  assert(dfa.GenerateChains(10) == nfa.GenerateChains(10));
-  PrintTask("L(M) = L(M')", GetChains(dfa.GenerateChains(5)));
-  PrintTask("L(M) = L(M')", GetChains(nfa.GenerateChains(5)));
+  assert(dfa.GenerateChains(10) == nfa.GenerateChains(10));
+  PrintTask("L(M')", GetChains(dfa.GenerateChains(5)));
+  PrintTask("L(M)", GetChains(nfa.GenerateChains(5)));
 
   dfa.ToDot("dfa.dot");
   PrintTask("Графическое представление: ", "dfa.dot");
