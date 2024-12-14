@@ -23,14 +23,25 @@ int main() {
   NFA nfa("k1", states, final_states, transitions);
 
 
-  // DFA nfa = ConvertNfaToDfa(dfa);
+  std::unordered_set<std::string> states_1 = {"{k1}", "{k1, k2, k3}", "{k2, k3}", "{k3}", "Ø"};
+  std::unordered_set<std::string> final_states_1 = { "{k1, k2, k3}", "{k2, k3}","{k3}"};
 
+  std::unordered_map<std::string, std::unordered_map<char, std::string>>  transitions_1= {
+      {"{k1}", {{'x', "{k1, k2, k3}"}, {'0', "Ø"}}},
+      {"{k1, k2, k3}", {{'x', "{k1, k2, k3}"}, {'0', "{k2, k3}"}}},
+      {"{k2, k3}", {{'x', "{k3}"}, {'0', "{k2, k3}"}}},
+      {"{k3}", {{'x', "{k3}"}, {'0', "Ø"}}},
+      {"Ø", {{'x', "Ø"}, {'0', "Ø"}}}
+  };
 
-  // assert(dfa.GenerateChains(10) == nfa.GenerateChains(10));
-  // PrintTask("L(M) = L(M')", GetChains(dfa.GenerateChains(5)));
+  DFA dfa("{k1}", states_1, final_states_1, transitions_1);
 
-  // dfa.ToDot("dfa.dot");
-  // PrintTask("Графическое представление: ", "dfa.dot");
+  assert(dfa.GenerateChains(10) == nfa.GenerateChains(10));
+  PrintTask("L(M')", GetChains(dfa.GenerateChains(5)));
+  PrintTask("L(M)", GetChains(nfa.GenerateChains(5)));
+
+  dfa.ToDot("dfa.dot");
+  PrintTask("Графическое представление: ", "dfa.dot");
 
   return EXIT_SUCCESS;
 }

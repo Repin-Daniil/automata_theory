@@ -1,6 +1,7 @@
 #pragma once
 #include "automata/automata.hpp"
 #include "grammar/grammar.hpp"
+#include <memory>
 
 class NFA : public Automata {
   public:
