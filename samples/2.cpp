@@ -13,4 +13,5 @@ int main() {
   PrintTask("L*",GetChains(KleeneStar(language_3, 2)));
   PrintTask("L+",GetChains(KleenePlus(language_3, 2)));
 
+  return EXIT_SUCCESS;
 }

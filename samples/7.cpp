@@ -1,7 +1,7 @@
 #include <assert.h>
 #include <iostream>
 
-#include "../lib/automata/converter.h"
+#include "../lib/automata/converter.hpp"
 #include "automata/dfa/dfa.hpp"
 #include "automata/nfa/nfa.hpp"
 #include "grammar/grammar.hpp"
@@ -10,11 +10,12 @@
 
 int main() {
   using namespace lab::format;
+  using namespace std::literals;
 
   PrintHead("--- №7 ---");
 
-  std::unordered_set<std::string> states = {"S", "A", "B", "C"};
-  std::unordered_set<std::string> final_states = {"C"};
+  std::unordered_set states = {"S"s, "A"s, "B"s, "C"s};
+  std::unordered_set final_states = {"C"s};
   std::unordered_map<std::string, std::unordered_map<char, std::string> > transitions = {
     {"S", {{'a', "A"}}},
     {"A", {{'b', "B"}}},

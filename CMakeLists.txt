@@ -13,7 +13,7 @@ add_library(AutomataLib STATIC
         lib/automata/automata.hpp
         lib/automata/NFA/nfa.cpp
         lib/automata/NFA/nfa.hpp
-        lib/automata/converter.h)
+        lib/automata/converter.hpp)
 
 add_executable(task_1 samples/1.cpp)
 add_executable(task_2 samples/2.cpp)
@@ -25,8 +25,6 @@ add_executable(task_7 samples/7.cpp)
 add_executable(task_8 samples/8.cpp)
 add_executable(task_9 samples/9.cpp)
 add_executable(task_10 samples/10.cpp)
-add_executable(task_11 samples/11.cpp)
-add_executable(task_12 samples/12.cpp)
 
 target_link_libraries(task_1 PRIVATE AutomataLib)
 target_link_libraries(task_2 PRIVATE AutomataLib)
@@ -38,7 +36,5 @@ target_link_libraries(task_7 PRIVATE AutomataLib)
 target_link_libraries(task_8 PRIVATE AutomataLib)
 target_link_libraries(task_9 PRIVATE AutomataLib)
 target_link_libraries(task_10 PRIVATE AutomataLib)
-target_link_libraries(task_11 PRIVATE AutomataLib)
-target_link_libraries(task_12 PRIVATE AutomataLib)
 
 include_directories(lib/)
