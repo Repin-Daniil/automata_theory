@@ -12,9 +12,10 @@ class Grammar {
   public:
     Grammar(Productions rules, char start_symbol);
     Language GetChains(std::size_t num_chains);
-  // Возвращает формальное представление грамматики
-  std::tuple<std::set<std::string>, Alphabet, char, Productions> GetFormalRepresentation() const;
-//TODO Формальное представление грамматики
+    std::tuple<std::set<std::string>, Alphabet, char, Productions> GetFormalRepresentation() const;
+
+  //TODO Конструктор от формального представления
+
   private:
     Productions rules_;
     char start_symbol_;

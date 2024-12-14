@@ -24,7 +24,6 @@ bool NFA::DFS(std::string_view chain, std::size_t index, const std::shared_ptr<S
 
   char symbol = chain[index];
 
-  // Проверяем переходы по текущему символу
   if (current_state->transitions.contains(symbol)) {
     for (const auto &next_state : current_state->transitions.at(symbol)) {
       if (DFS(chain, index + 1, next_state)) {
@@ -33,7 +32,7 @@ bool NFA::DFS(std::string_view chain, std::size_t index, const std::shared_ptr<S
     }
   }
 
-  // Проверяем ε-переходы (обрабатываем отдельно, не увеличивая index)
+  // ε-переходы (обрабатываем отдельно, не увеличивая index)
   if (current_state->transitions.contains('\0')) {
     for (const auto &next_state : current_state->transitions.at('\0')) {
       if (DFS(chain, index, next_state)) {
@@ -42,29 +41,27 @@ bool NFA::DFS(std::string_view chain, std::size_t index, const std::shared_ptr<S
     }
   }
 
-  return false; // Если ни один путь не оказался верным
+  return false;
 }
 
 void NFA::DFS(std::string &current_chain,
               std::shared_ptr<State> current_state,
               Language &language,
               std::size_t max_length) {
-  // Если состояние конечное, добавляем цепочку
+
   if (current_state->is_final) {
     language.insert(current_chain);
   }
 
-  // Прекращаем, если достигли максимальной длины
   if (current_chain.size() >= max_length) {
     return;
   }
 
-  // Рекурсивно обходим все переходы
   for (const auto &[symbol, next_states]: current_state->transitions) {
     for (const auto &next_state: next_states) {
       current_chain.push_back(symbol);
       DFS(current_chain, next_state, language, max_length);
-      current_chain.pop_back(); // Отменяем изменения после возвращения
+      current_chain.pop_back();
     }
   }
 }

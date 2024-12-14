@@ -9,11 +9,12 @@
 
 int main() {
   using namespace lab::format;
+  using namespace std::literals;
 
   PrintHead("--- №8 ---");
 
-  std::unordered_set<std::string> states = {"k1", "k2", "k3"};
-  std::unordered_set<std::string> final_states = {"k3"};
+  std::unordered_set states = {"k1"s, "k2"s, "k3"s};
+  std::unordered_set final_states = {"k3"s};
   std::unordered_map<std::string, std::unordered_map<char, std::vector<std::string>>> transitions = {
     {"k1", {{'x', {"k1", "k2", "k3"}}, {'0', {}}}},
     {"k2", {{'x', {}}, {'0', {"k2", "k3"}}}},
@@ -23,8 +24,8 @@ int main() {
   NFA nfa("k1", states, final_states, transitions);
 
 
-  std::unordered_set<std::string> states_1 = {"{k1}", "{k1, k2, k3}", "{k2, k3}", "{k3}", "Ø"};
-  std::unordered_set<std::string> final_states_1 = { "{k1, k2, k3}", "{k2, k3}","{k3}"};
+  std::unordered_set states_1 = {"{k1}"s, "{k1, k2, k3}"s, "{k2, k3}"s, "{k3}"s, "Ø"s};
+  std::unordered_set final_states_1 = { "{k1, k2, k3}"s, "{k2, k3}"s,"{k3}"s};
 
   std::unordered_map<std::string, std::unordered_map<char, std::string>>  transitions_1= {
       {"{k1}", {{'x', "{k1, k2, k3}"}, {'0', "Ø"}}},

@@ -32,6 +32,7 @@ class Automata {
 
     virtual ~Automata() = default;
 
+  //TODO Минимизация автомата
     //TODO Генерировать еще запись формального представления
   protected:
     struct State;

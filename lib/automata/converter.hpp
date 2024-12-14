@@ -37,3 +37,5 @@ inline NFA GetNfaFromGrammar(const Grammar& grammar) {
 
   return nfa;
 }
+
+//TODO Перевод из НКА в ДКА

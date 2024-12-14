@@ -21,5 +21,9 @@ int main() {
 
   PrintTask("L(G)", GetChains(nfa.GenerateChains(4)));
 
+
+  nfa.ToDot("nfa.dot");
+  PrintTask("Графическое представление: ", "nfa.dot");
+
   return EXIT_SUCCESS;
 }

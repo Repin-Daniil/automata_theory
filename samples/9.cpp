@@ -7,11 +7,12 @@
 
 int main() {
   using namespace lab::format;
+  using namespace std::literals;
 
   PrintHead("--- №9 ---");
 
-  std::unordered_set<std::string> states = {"S", "A", "B", "C"};
-  std::unordered_set<std::string> final_states = {"C"};
+  std::unordered_set states = {"S"s, "A"s, "B"s, "C"s};
+  std::unordered_set final_states = {"C"s};
   std::unordered_map<std::string, std::unordered_map<char, std::string> > transitions = {
     {"S", {{'a', "A"}}},
     {"A", {{'b', "B"}}},

@@ -27,6 +27,3 @@ class DFA final : public Automata {
     static std::unordered_map<std::string, std::unordered_map<char, std::vector<std::string> > > TransformTransitions(
       const std::unordered_map<std::string, std::unordered_map<char, std::string> > &transitions);
 };
-
-// Дополнить до полного с k_fc k фиктивный
-//   // Построить регулярную грамматику
